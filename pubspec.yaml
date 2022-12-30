@@ -1,0 +1,14 @@
+name: smart_mirror
+description: A Dawn app
+publish_to: none
+environment:
+  sdk: ">=2.18.0 <3.0.0"
+dependencies:
+  dawn: ^6.0.3
+  http: ^0.13.5
+  js: ^0.6.5
+  shamsi_date: ^1.0.1
+dev_dependencies:
+  build_runner: ^2.3.2
+  build_web_compilers: ^3.2.7
+  dawn_lints: ^3.0.0

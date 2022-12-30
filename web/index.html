@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fa-IR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Smart Mirror</title>
+
+    <link rel="shortcut icon" href="./assets/icon.svg" type="image/x-icon" />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+
+    <style>
+      @font-face {
+        font-family: "Vazirmatn RD FD";
+        src: url("./assets/fonts/Vazirmatn-RD-FD-Thin.woff2") format("woff2");
+        font-weight: 100;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Vazirmatn RD FD";
+        src: url("./assets/fonts/Vazirmatn-RD-FD-ExtraLight.woff2")
+          format("woff2");
+        font-weight: 200;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Vazirmatn RD FD";
+        src: url("./assets/fonts/Vazirmatn-RD-FD-Light.woff2") format("woff2");
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Vazirmatn RD FD";
+        src: url("./assets/fonts/Vazirmatn-RD-FD-Regular.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Vazirmatn RD FD";
+        src: url("./assets/fonts/Vazirmatn-RD-FD-Medium.woff2") format("woff2");
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Vazirmatn RD FD";
+        src: url("./assets/fonts/Vazirmatn-RD-FD-SemiBold.woff2")
+          format("woff2");
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Vazirmatn RD FD";
+        src: url("./assets/fonts/Vazirmatn-RD-FD-Bold.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Vazirmatn RD FD";
+        src: url("./assets/fonts/Vazirmatn-RD-FD-ExtraBold.woff2")
+          format("woff2");
+        font-weight: 800;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Vazirmatn RD FD";
+        src: url("./assets/fonts/Vazirmatn-RD-FD-Black.woff2") format("woff2");
+        font-weight: 900;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      *,
+      *::before,
+      *::after {
+        margin: 0px;
+        padding: 0px;
+        -webkit-tap-highlight-color: transparent;
+        box-sizing: border-box;
+      }
+    </style>
+
+    <script>
+      const speechRecognition = new webkitSpeechRecognition();
+
+      let scenarioStep = 0;
+
+      speechRecognition.lang = "fa-IR";
+      speechRecognition.interimResults = false;
+      speechRecognition.maxAlternatives = 2;
+
+      const matchResult = (results, matches) => {
+        for (let i = 0; i < results.length; i++) {
+          if (
+            matches.some((match) => results.item(i).transcript.includes(match))
+          ) {
+            return true;
+          }
+        }
+
+        return false;
+      };
+
+      speechRecognition.onresult = (event) => {
+        const results = event.results[0];
+
+        switch (scenarioStep) {
+          case 0:
+            if (matchResult(results, ["سلام", "درود"])) {
+              if (matchResult(results, ["آینه", "آیینه"])) {
+                scenarioStep = 4;
+                dispatchEvent(
+                  new CustomEvent("say-hello-without-intro-question")
+                );
+              } else {
+                scenarioStep = 1;
+                dispatchEvent(new CustomEvent("say-hello-with-intro-question"));
+              }
+            }
+            break;
+          case 1:
+            if (matchResult(results, ["بله", "آره"])) {
+              scenarioStep = 2;
+              dispatchEvent(new CustomEvent("say-short-intro"));
+            } else if (matchResult(results, ["خیر", "نه"])) {
+              scenarioStep = 4;
+              dispatchEvent(new CustomEvent("say-ready-for-commands"));
+            }
+            break;
+          case 2:
+            if (matchResult(results, ["بله", "آره"])) {
+              scenarioStep = 3;
+              dispatchEvent(new CustomEvent("show-full-intro-video"));
+            } else if (matchResult(results, ["خیر", "نه"])) {
+              scenarioStep = 4;
+              dispatchEvent(new CustomEvent("say-ready-for-commands"));
+            }
+            break;
+          case 3:
+            if (matchResult(results, ["بله", "آره"])) {
+              scenarioStep = 4;
+              dispatchEvent(new CustomEvent("show-irandoc-intro-video"));
+            } else if (matchResult(results, ["خیر", "نه"])) {
+              scenarioStep = 4;
+              dispatchEvent(new CustomEvent("say-ready-for-commands"));
+            }
+          case 4:
+            if (matchResult(results, ["خداحافظ", "خدانگهدار"])) {
+              scenarioStep = 0;
+              dispatchEvent(new CustomEvent("say-goodbye"));
+            } else if (matchResult(results, ["ویدیو", "فیلم", "ببینیم"])) {
+              dispatchEvent(new CustomEvent("show-video"));
+            } else if (
+              matchResult(results, ["موزیک", "آهنگ", "موسیقی", "گوش بدیم"])
+            ) {
+              dispatchEvent(new CustomEvent("play-music"));
+            } else if (matchResult(results, ["بسه", "لغو", "تمام"])) {
+              dispatchEvent(new CustomEvent("say-ready-for-commands"));
+            }
+            break;
+        }
+      };
+
+      speechRecognition.onend = (event) => event.target.start();
+
+      speechRecognition.start();
+    </script>
+
+    <script src="./main.dart.js" defer></script>
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+  </body>
+</html>
