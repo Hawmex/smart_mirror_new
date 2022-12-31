@@ -35,10 +35,6 @@ class Stage extends StatelessWidget {
                   icon: 'chat',
                 ),
               ]),
-              // TODO
-              // StageSnapshot.message(const [
-              //   Message.withoutSpeech('امروز هوا خوب و ابریه.', icon: 'chat')
-              // ]),
               StageSnapshot.message(const [
                 Message.withoutSpeech(
                   'چه کاری می‌تونم برات انجام بدم؟',
@@ -73,10 +69,6 @@ class Stage extends StatelessWidget {
                   icon: 'chat',
                 ),
               ]),
-              // TODO
-              // StageSnapshot.message(const [
-              //   Message.withoutSpeech('امروز هوا خوب و ابریه.', icon: 'chat')
-              // ]),
               StageSnapshot.message(const [
                 Message.withoutSpeech(
                   'می‌خوای خودمو بهت معرفی کنم؟',
@@ -155,10 +147,6 @@ class Stage extends StatelessWidget {
           case InteractionStatus.sayGoodbye:
             return StageSequencer([
               StageSnapshot.message(const [
-                Message.withoutSpeech(
-                  'خدانگهدار. راستی هفته‌ی پژوهش مبارک!',
-                  icon: 'waving_hand',
-                ),
                 Message.withoutSpeech(
                   'روز خوبی داشته باشی.',
                   icon: 'waving_hand',
