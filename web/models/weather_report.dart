@@ -24,7 +24,7 @@ class WeatherReport {
         'api.weatherapi.com',
         'v1/current.json',
         {
-          'key': '1adf4aa78cf54823bb992817221703',
+          'key': '46f93780fe9a41f8a4962443223112',
           'q': locationStore.location?.city ??
               (await Location.getCurrent()).city,
           'aqi': 'no',
