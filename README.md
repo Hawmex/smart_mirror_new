@@ -1,21 +1,30 @@
-<img
-    src="https://raw.githubusercontent.com/Hawmex/dawn/main/example/web/assets/banner.svg"
-    width="100%"
-/>
+# RoboDoc Lab's Smart Mirror
 
----
+This repository contains the prototype for the Smart Mirror project at RoboDoc
+Lab, IRANDOC.
 
-# smart_mirror
+This app is made with [Dawn](https://github.com/Hawmex/dawn) (succeeded by
+[Navand](https://github.com/Hawmex/navand)).
 
-A Dawn App.
+## Features
 
-[ [Visit Dawn's official website →](https://dawn-dev.netlify.app) ]
+- Voice activation
+- Interaction scenario upon activation
+- A weather widget
+- A DateTime widget
+- Voice commands
+  - A voice command for playing videos.
+  - A voice command for playing music.
+  - A voice command for deactivating the mirror.
 
-## Serve Your App
+## Screenshots
 
-```
-webdev serve
-```
+### Inactive State
 
-[ [Read more →](https://dawn-dev.netlify.app) ]
+- The DateTime widget is in the top right.
+- The weather widget is in the top left
+- "Wake me up!" is shown in the center.
+- The available voice commands are shown in the bottom right.
+- The Smart Mirror's name is in the bottom left.
 
+![Smart Mirror](./screenshots/main.png)
