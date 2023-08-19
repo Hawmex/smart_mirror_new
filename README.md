@@ -17,6 +17,32 @@ This app is made with [Dawn](https://github.com/Hawmex/dawn) (succeeded by
   - A voice command for playing music.
   - A voice command for deactivating the mirror.
 
+## Getting Started
+
+### Serve the Application
+
+First, you should install `webdev`:
+
+```
+dart pub global activate webdev
+```
+
+Then, you can serve the app by running:
+
+```
+webdev serve
+```
+
+### Build the Application
+
+To build the application, run:
+
+```
+webdev build
+```
+
+You can find the output at `build/`.
+
 ## Screenshots
 
 ### Inactive State
