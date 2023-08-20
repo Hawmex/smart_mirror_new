@@ -9,7 +9,7 @@ This app is made with [Dawn](https://github.com/Hawmex/dawn) (succeeded by
 ## Features
 
 - Voice activation
-- Interaction scenario upon activation
+- An interaction scenario upon activation
 - A weather widget
 - A DateTime widget
 - Voice commands
@@ -47,10 +47,10 @@ You can find the output at `build/`.
 
 ### Inactive State
 
-- The DateTime widget is in the top right.
-- The weather widget is in the top left
+- The DateTime widget is on the top right.
+- The weather widget is on the top left
 - "Wake me up!" is shown in the center.
-- The available voice commands are shown in the bottom right.
-- The Smart Mirror's name is in the bottom left.
+- The available voice commands are shown on the bottom right.
+- The Smart Mirror's name is on the bottom left.
 
 ![Smart Mirror](./screenshots/main.png)
